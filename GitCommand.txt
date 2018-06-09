@@ -1,0 +1,4 @@
+-สร้าง Git
+git init
+-check status Git
+git status
