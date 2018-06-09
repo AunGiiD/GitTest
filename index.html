@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vue.js + Firebase</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+	<div class="container col-md-6" id="div_comment">
+		<h5 >Hello Test Vue.js+FireBase</h5>
+		
+		<div class="card" v-for="message in messages">
+			<div class="car-body">
+				<h5 class="card-title" v-if="message!=editText">{{message.comment_user}}</h5>
+				<textarea v-else name="comment_vue" class="form-control" v-model="messageText"></textarea>
+				<p class="card-text text-muted">{{message.name_user}}</p>
+				<p class="card-text text-muted">{{message.comment_id}}</p>
+				<div v-if="message!=editText">
+					<a href="#" class="card-link" @click.prevent="deleteMessage(message)" >Delete</a> 
+					<a href="#" class="card-link" @click.prevent="editMessage(message)" >Edit</a> 
+				</div>
+				<div v-else>
+					<a href="#" class="card-link" @click.prevent="cancleMessage(message)" >Cancle</a> 
+					<a href="#" class="card-link" @click.prevent="updateMessage(message)" >Update</a> 
+				</div>
+				
+			</div>
+		</div>
+	
+
+	<form v-if="!editText" class="form-group" @submit.prevent="storeMessage">
+		<div>
+			<textarea name="comment_vue" class="form-control" v-model="messageText">
+				
+			</textarea>
+		</div>
+		<label for="name_user">Name : </label>
+		<input type="text" name="name_user" class="form-control" v-model="name"><br>
+		<button type="submit" class="btn bth-primary">Comment now!!</button>
+	</form>
+	
+	</div>
+	
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.3/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCi6zD6keBAjJbWdUrrpTpSqIol2sQDZWE",
+    authDomain: "vuetestpro1.firebaseapp.com",
+    databaseURL: "https://vuetestpro1.firebaseio.com",
+    projectId: "vuetestpro1",
+    storageBucket: "vuetestpro1.appspot.com",
+    messagingSenderId: "722169755334"
+  };
+  firebase.initializeApp(config);
+</script>
+<script type="text/javascript" src="app.js"></script>
+
+</body>
+</html>
